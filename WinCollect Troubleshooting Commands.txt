@@ -1,0 +1,44 @@
+Test the connection from the WinCollect server to the Managed host: 8413
+tnc <Server IP> -port 8413
+
+Test the connection from the WinCollect server to the Endpoints: 135, 139, 554
+tnc <Server IP> -port 135
+tnc <Server IP> -port 139
+tnc <Server IP> -port 445
+
+
+Change the Identifier
+Select-String -path 'C:\Program Files\IBM\WinCollect\config\install_config.txt' -pattern "ApplicationIdentifier"
+((Get-Content -path C:\Program Files\IBM\WinCollect\config\install_config.txt -Raw) -replace '<Current Value>','<New Value>') | Set-Content -Path C:\Program Files\IBM\WinCollect\config\install_config.txt
+
+Change the Configuration Server and Status Server
+Select-String -path 'C:\Program Files\IBM\WinCollect\config\install_config.txt' -pattern "ConfigurationServer"
+Select-String -path 'C:\Program Files\IBM\WinCollect\config\install_config.txt' -pattern "StatusServer"
+((Get-Content -path C:\Program Files\IBM\WinCollect\config\install_config.txt -Raw) -replace '<Current Value>','<New Value>') | Set-Content -Path C:\Program Files\IBM\WinCollect\config\install_config.txt
+
+
+C:\Program Files\IBM\WinCollect\config\install_config.txt
+
+Sample:
+ApplicationIdentifier=BFDCCWVSTST001
+ConfigurationServer=10.0.131.192
+ConfigurationServerPort=8413
+ConfigurationServerMinSSLProtocol=TLSv1
+ConfigurationServerMaxSSLProtocol=TLSv1.2
+StatusServer=10.0.131.192
+ApplicationToken=CHWyjXE7yZODs8sZURRTXy3UZm/3OT9QtL2EXZIUqYDHfbU6yR798rPYtQsKeUeakCrnK9Qmlp+tSi4ECp9dL9xUcvrif0yQXfYne5iDP9DhMETsxT2cC2mzHq54PLXhA6kxuqBzGgju6/jxn6w6KXuRipsIxbksB3Hfxree52Y=
+BuildNumber=96
+
+
+Search for Queries
+Select-String -path 'C:\Program Files\IBM\WinCollect\logs\WinCollect.log' -pattern "<Desired Search>"
+
+Open the file (and scroll to the bottom)
+start 'C:\Program Files\IBM\WinCollect\logs\WinCollect.txt'
+
+C:\Program Files\IBM\WinCollect\logs\WinCollect.txt
+
+Check the WinCollect Service
+Get-Service WinCollect
+Stop-Service WinCollect
+Start-Service WinCollect
