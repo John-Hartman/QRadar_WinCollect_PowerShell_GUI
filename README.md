@@ -7,4 +7,4 @@ Some of the actions include:
 - View/Edit the config endpoints
 - Generate a new PEM for the WinCollect agent
 
-![Screenshot_of_GUI]()
+![Screenshot_of_GUI](https://github.com/John-Hartman/QRadar_WinCollect_PowerShell_GUI/blob/main/PS%20GUI.PNG)
